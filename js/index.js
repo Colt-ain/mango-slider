@@ -1,11 +1,14 @@
-var start = Date.now();
-var timer = setInterval(function() {
-  if (timePassed >= 2000) { clearInterval(timer);
-      return;
-  }
-  draw(timePassed);
-  }, 20);
+slide.onclick = function() {
+    var start = Date.now(); // сохранить время начала
 
-  function draw(timePassed) {
-   train.style.left = timePassed / 5 + 'px';
- }
+    var timer = setInterval(function() {
+        // вычислить сколько времени прошло из opts.duration
+        var timePassed = Date.now() - start;
+
+        slide.style.left = timePassed / 5 + 'px';
+
+        if (timePassed > 2000)  { clearInterval(timer);
+        }
+    },
+    20);
+}

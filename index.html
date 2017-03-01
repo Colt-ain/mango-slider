@@ -10,14 +10,14 @@
 
     <link rel="stylesheet" href="css/font-awesome.min.css">
 
-
-    <script type="text/javascript">
-        // создаем функию смещения слайда вправо на 1
-        var rightOnOne() {
-            // событие onclick передвигаем на 1 слайд
-            // если
+    <style media="screen">
+        #slide {
+            position: relative;
+            cursor: pointer;
         }
-    </script>
+    </style>
+
+
 </head>
 <body>
 
@@ -37,16 +37,35 @@
 
     <div class="slider">
         <div class="slider-inner">
-            <div class="slider-slides">
-                <img src="img/slide1.jpg" alt="Кекс смотрит на еду">
-                <img src="img/slide2.jpg" alt="Кекс смотрит на тебя">
-                <img src="img/slide3.jpg" alt="Кекс не хочет никуда смотреть">
+            <div id="slide" class="slider-slides">
+                <img id="sliderSlides" src="img/slide1.jpg" alt="slide1">
+                <img id="sliderSlides" src="img/slide2.jpg" alt="slide2">
+                <img id="sliderSlides" src="img/slide3.jpg" alt="slide3">
             </div>
         </div>
-
     </div>
 
 </section>
 
+<script>
+
+    slide.onclick = function() {
+        var start = Date.now(); // сохранить время начала
+
+        var timer = setInterval(function() {
+
+            slide.style.left = "-" + 100 + '%';
+            slide.style.transition = "transform " + 0.8 + "s " + "translate;"
+            slide.style.position = "relative";
+            slide.style.cursor = "pointer";
+            slide.style.transition = "transform" + " " + 0.8 + "s" + " " + "ease";
+
+            if (slide.style.left > 860)  { clearInterval(timer);
+            }
+        },
+        20);
+    }
+
+</script>
 </body>
 </html>
