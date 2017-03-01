@@ -1,0 +1,113 @@
+.slider-container {
+    position: relative;
+    width: 100%;
+    background-color: white;
+    box-shadow: 0 0 3px #cccccc;
+}
+
+.slider {
+    position: relative;
+}
+
+.slider-inner {
+    overflow: hidden;
+}
+
+.slider-slides {
+    width: 300%;
+    transition: transform 0.8s ease;
+}
+// классы для анимации слайдера
+.slide-to-right { // на один слайд справо
+    transform: translateX(-33.33333333333333%);
+}
+.slide-to-letf { // на один слайд слево
+    transform: translateX(33.33333333333333%);
+}
+
+
+.slider-slides img {
+    width: 33.33333333333%;
+    float: left;
+}
+.slider-controls {
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    top: 90%;
+    z-index: 100;
+}
+.slider-controls-left {
+    position: absolute;
+    z-index: 100;
+    top: 0;
+    button: 0;
+    width: 15%;
+    height: 100%;
+    font-size: 30px;
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0,0,0,.6);
+    background-color: rgba(0,0,0,0);
+    cursor: pointer;
+}
+.slider-controls-left:hover {
+    background-image: linear-gradient(to right,rgba(0,0,0,.5) 0, rgba(0,0,0,.0001) 100%);
+}
+.slider-controls-right:hover {
+    background-image: linear-gradient(to right,rgba(0,0,0,.0001) 0,rgba(0,0,0,.5) 100%);
+}
+.slider-controls-left span {
+    position: absolute;
+    top: 45%;
+}
+.slider-controls-right span {
+    position: absolute;
+    top: 45%;
+}
+.slider-controls-right {
+    position: absolute;
+    z-index: 100;
+    top: 0;
+    button: 0;
+    left: 85%;
+    right: 100%;
+    width: 15%;
+    height: 100%;
+    font-size: 30px;
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0,0,0,.6);
+    background-color: rgba(0,0,0,0);
+    cursor: pointer;
+}
+.slider-controls-btn {
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    margin: 0 7px;
+    background-color: rgba(255, 255, 255, 0.55);
+    border-radius: 50%;
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.8);
+    transition: background-color 0.3s;
+    cursor: pointer;
+    border: 2px solid rgba(255, 255, 255, 0);
+}
+
+.slider-controls-btn:hover {
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    margin: 0 7px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.75);
+    transition: background-color 0.3s;
+    cursor: pointer;
+    border: 2px solid rgba(255, 255, 255, 1);
+
+}
+.slider-controls-btn:not(:first-of-type) {
+    margin-left: 5px;
+}
