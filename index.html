@@ -52,7 +52,7 @@
 
         var sliderOffset = [];
         for (var i = 0; i < slideNumber; i++) {
-            sliderOffset.push(-i * 1280 + 'px');
+            sliderOffset.push(-i * 100 + '%');
         }
         console.log(sliderOffset);
         document.getElementById('leftbutton').onclick = function() {
@@ -70,6 +70,10 @@
             document.getElementById('slide').style.left = sliderOffset[ShowNow];
         }
 
+        // таймер слайдера
+        function inear(timeFraction) {
+
+        }
 
 
 
