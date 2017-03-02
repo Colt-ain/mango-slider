@@ -15,7 +15,8 @@
 
 .slider-slides {
     width: 300%;
-    transition: transform 0.8s translate;
+    transition: left 0.76s;
+
 }
 // классы для анимации слайдера
 .slide-to-right { // на один слайд справо

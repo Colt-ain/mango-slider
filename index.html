@@ -28,44 +28,54 @@
         <div class="slider-controls-btn"></div>
     </div>
 
-    <div class="slider-controls-right">
+    <div class="slider-controls-right" id="rightbutton">
         <span class="fa fa-chevron-right"></span>
     </div>
-    <div class="slider-controls-left">
+    <div class="slider-controls-left" id="leftbutton">
         <span class="fa fa-chevron-left"></span>
     </div>
 
     <div class="slider">
         <div class="slider-inner">
             <div id="slide" class="slider-slides">
-                <img id="sliderSlides" src="img/slide1.jpg" alt="slide1">
-                <img id="sliderSlides" src="img/slide2.jpg" alt="slide2">
-                <img id="sliderSlides" src="img/slide3.jpg" alt="slide3">
+                <img src="img/slide1.jpg" alt="slide1">
+                <img src="img/slide2.jpg" alt="slide2">
+                <img src="img/slide3.jpg" alt="slide3">
             </div>
         </div>
     </div>
 
 </section>
 
-<script>
+    <script>
+        var slideNumber = document.getElementById('slide').getElementsByTagName('img').length;
+        var ShowNow = 0; // первой будет выведена картинка с индексом 0 (т.е. первая)
 
-    slide.onclick = function() {
-        var start = Date.now(); // сохранить время начала
-
-        var timer = setInterval(function() {
-
-            slide.style.left = "-" + 100 + '%';
-            slide.style.transition = "transform " + 0.8 + "s " + "translate;"
-            slide.style.position = "relative";
-            slide.style.cursor = "pointer";
-            slide.style.transition = "transform" + " " + 0.8 + "s" + " " + "ease";
-
-            if (slide.style.left > 860)  { clearInterval(timer);
+        var sliderOffset = [];
+        for (var i = 0; i < slideNumber; i++) {
+            sliderOffset.push(-i * 1280 + 'px');
+        }
+        console.log(sliderOffset);
+        document.getElementById('leftbutton').onclick = function() {
+            --ShowNow;
+            if(ShowNow < 0) {
+                ShowNow = slideNumber - 1;
             }
-        },
-        20);
-    }
+            document.getElementById('slide').style.left = sliderOffset[ShowNow];
+        }
+        document.getElementById('rightbutton').onclick = function() {
+            ++ShowNow;
+            if(ShowNow > slideNumber - 1) {
+                ShowNow = 0;
+            }
+            document.getElementById('slide').style.left = sliderOffset[ShowNow];
+        }
+        
 
-</script>
+
+
+
+
+    </script>
 </body>
 </html>
