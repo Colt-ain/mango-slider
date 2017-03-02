@@ -13,18 +13,19 @@
     <style media="screen">
         #slide {
             position: relative;
+            transition: left 0.76s;
+
         }
     </style>
-
-
 </head>
 <body>
 
+
 <section class="slider-container">
     <div class="slider-controls">
-        <div class="slider-controls-btn"></div>
-        <div class="slider-controls-btn"></div>
-        <div class="slider-controls-btn"></div>
+        <div id="slider-controls-btn1" class="slider-controls-btn"></div>
+        <div id="slider-controls-btn2" class="slider-controls-btn"></div>
+        <div id="slider-controls-btn3"class="slider-controls-btn"></div>
     </div>
 
     <div class="slider-controls-right" id="rightbutton">
@@ -35,50 +36,62 @@
     </div>
 
     <div class="slider">
-        <div class="slider-inner">
             <div id="slide" class="slider-slides">
-                <img src="img/slide1.jpg" alt="slide1">
-                <img src="img/slide2.jpg" alt="slide2">
-                <img src="img/slide3.jpg" alt="slide3">
+                <img id="slide-1" class="slides" src="img/slide1.jpg" alt="slide1">
+                <img id="slide-2" class="slides" src="img/slide2.jpg" alt="slide2">
+                <img id="slide-3" class="slides" src="img/slide3.jpg" alt="slide3">
+
             </div>
-        </div>
     </div>
-
 </section>
+<div id="timer_inp">5</div>
 
-    <script>
-        var slideNumber = document.getElementById('slide').getElementsByTagName('img').length;
-        var ShowNow = 0; // первой будет выведена картинка с индексом 0 (т.е. первая)
 
-        var sliderOffset = [];
-        for (var i = 0; i < slideNumber; i++) {
-            sliderOffset.push(-i * 100 + '%');
+<script >
+    document.getElementById('slide').style.left = 0 + "px";
+    var slideNumber = document.getElementById('slide').getElementsByTagName('img').length;
+    var ShowNow = 0; // первой будет выведена картинка с индексом 0 (т.е. первая)
+
+
+
+    for (var i=0; i < slideNumber; i++) {
+        var imgWidth = document.getElementById('slide' + "-" + (i+1)).width;
+        imgWidth = 100 / slideNumber + "%";
+        document.getElementById('slide' + "-" + (i+1)).style.width = imgWidth;
+    }
+
+    document.getElementById('slide').style.width = slideNumber * 100 + "%";
+
+
+    var sliderOffset = []; // массив со сдвигами слайдера
+    for (var i = 0; i < slideNumber; i++) {
+        sliderOffset.push(-i * 100 + '%');
+    }
+    console.log(sliderOffset);
+    document.getElementById('leftbutton').onclick = function() {
+        --ShowNow;
+        if(ShowNow < 0) {
+            ShowNow = slideNumber - 1;
         }
-        console.log(sliderOffset);
-        document.getElementById('leftbutton').onclick = function() {
-            --ShowNow;
-            if(ShowNow < 0) {
-                ShowNow = slideNumber - 1;
-            }
-            document.getElementById('slide').style.left = sliderOffset[ShowNow];
+        document.getElementById('slide').style.left = sliderOffset[ShowNow];
+    }
+    document.getElementById('rightbutton').onclick = function() {
+        ++ShowNow;
+        if(ShowNow > slideNumber - 1) {
+            ShowNow = 0;
         }
-        document.getElementById('rightbutton').onclick = function() {
-            ++ShowNow;
-            if(ShowNow > slideNumber - 1) {
-                ShowNow = 0;
-            }
-            document.getElementById('slide').style.left = sliderOffset[ShowNow];
-        }
+        document.getElementById('slide').style.left = sliderOffset[ShowNow];
 
-        // таймер слайдера
-        function inear(timeFraction) {
+    }
+    // функция подсветки индикаторов
 
-        }
+    // таймер слайдера
+    var timer = setInterval(document.getElementById('rightbutton').onclick, 3000);
 
 
 
 
+</script>
 
-    </script>
 </body>
 </html>
