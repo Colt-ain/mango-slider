@@ -14,6 +14,7 @@
         #slide {
             position: relative;
             transition: left 0.76s;
+            left: 0px;
 
         }
     </style>
@@ -25,7 +26,7 @@
     <div class="slider-controls">
         <div id="slider-controls-btn1" class="slider-controls-btn"></div>
         <div id="slider-controls-btn2" class="slider-controls-btn"></div>
-        <div id="slider-controls-btn3"class="slider-controls-btn"></div>
+        <div id="slider-controls-btn3" class="slider-controls-btn"></div>
     </div>
 
     <div class="slider-controls-right" id="rightbutton">
@@ -48,26 +49,31 @@
 
 
 <script >
-    document.getElementById('slide').style.left = 0 + "px";
+    //document.getElementById('slide').style.left = 0 + "px";
+    var selog = document.querySelectorAll('div > img');
+    var left = document.getElementById('slide').style.left;
     var slideNumber = document.getElementById('slide').getElementsByTagName('img').length;
     var ShowNow = 0; // первой будет выведена картинка с индексом 0 (т.е. первая)
+    var sliderOffset; // массив со сдвигами слайдера
 
-
-
-    for (var i=0; i < slideNumber; i++) {
+    // функция для подсчета ширины img в зависимости от количества слайдов
+    for (var i = 0; i < slideNumber; i++) {
         var imgWidth = document.getElementById('slide' + "-" + (i+1)).width;
         imgWidth = 100 / slideNumber + "%";
         document.getElementById('slide' + "-" + (i+1)).style.width = imgWidth;
     }
-
+    // функция подсчета ширины всего блока с img от количества слайдов
     document.getElementById('slide').style.width = slideNumber * 100 + "%";
 
-
+    // функция формирования массива с сдвигами
     var sliderOffset = []; // массив со сдвигами слайдера
     for (var i = 0; i < slideNumber; i++) {
         sliderOffset.push(-i * 100 + '%');
     }
     console.log(sliderOffset);
+    console.log(selog);
+
+    // функция для сдвига на клик влево
     document.getElementById('leftbutton').onclick = function() {
         --ShowNow;
         if(ShowNow < 0) {
@@ -75,6 +81,8 @@
         }
         document.getElementById('slide').style.left = sliderOffset[ShowNow];
     }
+
+    // функция на сдвиг вправо
     document.getElementById('rightbutton').onclick = function() {
         ++ShowNow;
         if(ShowNow > slideNumber - 1) {
@@ -83,13 +91,14 @@
         document.getElementById('slide').style.left = sliderOffset[ShowNow];
 
     }
+
     // функция подсветки индикаторов
 
     // таймер слайдера
-    var timer = setInterval(document.getElementById('rightbutton').onclick, 3000);
+    var timer = function() {
+        setInterval(document.getElementById('rightbutton').onclick, 3000);
 
-
-
+    }
 
 </script>
 

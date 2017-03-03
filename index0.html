@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mangooslider</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+
+    <style media="screen">
+        #slide {
+            position: relative;
+            transition: left 0.76s;
+            left: 0px;
+
+        }
+    </style>
+</head>
+<body>
+
+
+<section class="slider-container">
+    <div class="slider-controls">
+        <div id="slider-controls-btn1" class="slider-controls-btn"></div>
+        <div id="slider-controls-btn2" class="slider-controls-btn"></div>
+        <div id="slider-controls-btn3" class="slider-controls-btn"></div>
+    </div>
+
+    <div class="slider-controls-right rightbutton" id="rightbutton">
+        <span class="fa fa-chevron-right"></span>
+    </div>
+    <div class="slider-controls-left leftbutton" id="leftbutton">
+        <span class="fa fa-chevron-left "></span>
+    </div>
+
+    <div class="slider">
+            <div id="slide" class="slider-slides">
+                <img class="slides" src="img/slide1.jpg" alt="slide1">
+                <img class="slides" src="img/slide2.jpg" alt="slide2">
+                <img class="slides" src="img/slide3.jpg" alt="slide3">
+
+            </div>
+    </div>
+</section>
+<br />
+
+
+    <script >
+
+
+        var slide = {
+            left: document.querySelector(".slider-slides").style.left,
+            slideNumber: document.querySelector(".slider-slides").getElementsByTagName('img').length,
+            ShowNow: 0,
+            sliderOffset: [],
+            leftbutton: document.querySelector('.leftbutton'),
+            rightbutton: document.querySelector('.rightbutton'),
+            imgWidth: function() {
+                // функция для подсчета ширины img в зависимости от количества слайдов
+                for (var i = 0; i < this.slideNumber; i++) {
+                    document.querySelector(".slides" + ":nth-child(" + (i + 1) + ")").style.width = 100 / this.slideNumber + "%";
+
+                }
+            },
+            sliderWidth: function() {
+                // функция подсчета ширины всего блока с img от количества слайдов
+                document.querySelector('.slider-slides').style.width = this.slideNumber * 100 + "%";
+            },
+            slideMake: function() {
+                for (var i = 0; i < this.slideNumber; i++) {
+                    this.sliderOffset.push(-i * 100 + '%');
+                }
+                console.log(this.sliderOffset);
+            },
+            slideLeft: function() {
+                var shownowL = this.ShowNow;
+                var slidenumberL = this.slideNumber;
+                leftbutton.onclick = function() {
+                    --shownowL;
+                    console.log(shownowL);
+                    if(shownowL < 0) {
+                        shownowL = slidenumberL - 1;
+                    }
+                    console.log(shownowL);
+                    document.querySelector(".slider-slides").style.left = slide.sliderOffset[shownowL];
+                }
+            },
+            slideRight: function() {
+                var shownowR = this.ShowNow;
+                var slidenumberR = this.slideNumber;
+                rightbutton.onclick = function() {
+                    ++shownowR;
+                    console.log(shownowR);
+                    if(shownowR > slidenumberR -1) {
+                        shownowR = 0;
+                    }
+                    console.log(shownowR);
+                    document.querySelector(".slider-slides").style.left = slide.sliderOffset[shownowR];
+                }
+            }
+
+
+        }
+            // функция подсветки индикаторов
+            // таймер слайдера
+        slide.imgWidth();
+        slide.sliderWidth();
+        slide.slideMake();
+        slide.slideLeft();
+        slide.slideRight();
+    </script>
+
+</body>
+</html>
