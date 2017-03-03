@@ -24,9 +24,9 @@
 
 <section class="slider-container">
     <div class="slider-controls">
-        <div id="slider-controls-btn1" class="slider-controls-btn"></div>
-        <div id="slider-controls-btn2" class="slider-controls-btn"></div>
-        <div id="slider-controls-btn3" class="slider-controls-btn"></div>
+        <div class="slider-controls-btn slider-controls-btn1"></div>
+        <div class="slider-controls-btn slider-controls-btn2"></div>
+        <div class="slider-controls-btn slider-controls-btn3"></div>
     </div>
 
     <div class="slider-controls-right rightbutton" id="rightbutton">
@@ -41,16 +41,14 @@
                 <img class="slides" src="img/slide1.jpg" alt="slide1">
                 <img class="slides" src="img/slide2.jpg" alt="slide2">
                 <img class="slides" src="img/slide3.jpg" alt="slide3">
-
             </div>
     </div>
 </section>
 <br />
 
 
+
     <script >
-
-
         var slide = {
             left: document.querySelector(".slider-slides").style.left,
             slideNumber: document.querySelector(".slider-slides").getElementsByTagName('img').length,
@@ -76,41 +74,40 @@
                 console.log(this.sliderOffset);
             },
             slideLeft: function() {
-                var shownowL = this.ShowNow;
-                var slidenumberL = this.slideNumber;
-                leftbutton.onclick = function() {
-                    --shownowL;
-                    console.log(shownowL);
-                    if(shownowL < 0) {
-                        shownowL = slidenumberL - 1;
+                // var shownowL = this.ShowNow;
+                // var slidenumberL = this.slideNumber;
+                this.leftbutton.onclick = function() {
+                    --slide.ShowNow;
+                    console.log(slide.ShowNow);
+                    if(slide.ShowNow < 0) {
+                        slide.ShowNow = slide.slideNumber - 1;
                     }
-                    console.log(shownowL);
-                    document.querySelector(".slider-slides").style.left = slide.sliderOffset[shownowL];
+                    console.log(slide.ShowNow);
+                    document.querySelector(".slider-slides").style.left = slide.sliderOffset[slide.ShowNow];
                 }
             },
             slideRight: function() {
-                var shownowR = this.ShowNow;
-                var slidenumberR = this.slideNumber;
-                rightbutton.onclick = function() {
-                    ++shownowR;
-                    console.log(shownowR);
-                    if(shownowR > slidenumberR -1) {
-                        shownowR = 0;
+                this.rightbutton.onclick = function() {
+                    ++slide.ShowNow;
+                    console.log(slide.ShowNow);
+                    if(slide.ShowNow > slide.slideNumber -1) {
+                        slide.ShowNow = 0;
                     }
-                    console.log(shownowR);
-                    document.querySelector(".slider-slides").style.left = slide.sliderOffset[shownowR];
+                    console.log(slide.ShowNow);
+                    document.querySelector(".slider-slides").style.left = slide.sliderOffset[slide.ShowNow];
                 }
+            },
+            lightBubs: function() {
+
             }
-
-
         }
-            // функция подсветки индикаторов
-            // таймер слайдера
+
         slide.imgWidth();
         slide.sliderWidth();
         slide.slideMake();
         slide.slideLeft();
         slide.slideRight();
+
     </script>
 
 </body>
