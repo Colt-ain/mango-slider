@@ -10,8 +10,8 @@
 
     <link rel="stylesheet" href="css/font-awesome.min.css">
 
-    <style media="screen">
-        #slide {
+    <style>
+        .slide {
             position: relative;
             transition: left 0.76s;
             left: 0px;
@@ -24,20 +24,20 @@
 
 <section class="slider-container">
     <div class="slider-controls">
-        <div class="slider-controls-btn slider-controls-btn1"></div>
-        <div class="slider-controls-btn slider-controls-btn2"></div>
-        <div class="slider-controls-btn slider-controls-btn3"></div>
+        <div class="slider-controls-btn" id="slider-controls-btn-1"></div>
+        <div class="slider-controls-btn" id="slider-controls-btn-2"></div>
+        <div class="slider-controls-btn" id="slider-controls-btn-3"></div>
     </div>
 
-    <div class="slider-controls-right rightbutton" id="rightbutton">
+    <div class="slider-controls-right rightbutton">
         <span class="fa fa-chevron-right"></span>
     </div>
-    <div class="slider-controls-left leftbutton" id="leftbutton">
+    <div class="slider-controls-left leftbutton">
         <span class="fa fa-chevron-left "></span>
     </div>
 
     <div class="slider">
-            <div id="slide" class="slider-slides">
+            <div class="slider-slides slide" id="slider1">
                 <img class="slides" src="img/slide1.jpg" alt="slide1">
                 <img class="slides" src="img/slide2.jpg" alt="slide2">
                 <img class="slides" src="img/slide3.jpg" alt="slide3">
@@ -48,65 +48,196 @@
 
 
 
-    <script >
-        var slide = {
-            left: document.querySelector(".slider-slides").style.left,
-            slideNumber: document.querySelector(".slider-slides").getElementsByTagName('img').length,
-            ShowNow: 0,
-            sliderOffset: [],
-            leftbutton: document.querySelector('.leftbutton'),
-            rightbutton: document.querySelector('.rightbutton'),
-            imgWidth: function() {
-                // функция для подсчета ширины img в зависимости от количества слайдов
-                for (var i = 0; i < this.slideNumber; i++) {
-                    document.querySelector(".slides" + ":nth-child(" + (i + 1) + ")").style.width = 100 / this.slideNumber + "%";
 
-                }
-            },
-            sliderWidth: function() {
-                // функция подсчета ширины всего блока с img от количества слайдов
-                document.querySelector('.slider-slides').style.width = this.slideNumber * 100 + "%";
-            },
-            slideMake: function() {
-                for (var i = 0; i < this.slideNumber; i++) {
-                    this.sliderOffset.push(-i * 100 + '%');
-                }
-                console.log(this.sliderOffset);
-            },
-            slideLeft: function() {
-                // var shownowL = this.ShowNow;
-                // var slidenumberL = this.slideNumber;
-                this.leftbutton.onclick = function() {
-                    --slide.ShowNow;
-                    console.log(slide.ShowNow);
-                    if(slide.ShowNow < 0) {
-                        slide.ShowNow = slide.slideNumber - 1;
-                    }
-                    console.log(slide.ShowNow);
-                    document.querySelector(".slider-slides").style.left = slide.sliderOffset[slide.ShowNow];
-                }
-            },
-            slideRight: function() {
-                this.rightbutton.onclick = function() {
-                    ++slide.ShowNow;
-                    console.log(slide.ShowNow);
-                    if(slide.ShowNow > slide.slideNumber -1) {
-                        slide.ShowNow = 0;
-                    }
-                    console.log(slide.ShowNow);
-                    document.querySelector(".slider-slides").style.left = slide.sliderOffset[slide.ShowNow];
-                }
-            },
-            lightBubs: function() {
+    <script>
+        function Slider(name, number) {
+            this.name = name;
+            this.number = number;
+            this.slideNumber = document.getElementById(this.name).getElementsByTagName('img').length;
 
-            }
         }
 
-        slide.imgWidth();
-        slide.sliderWidth();
-        slide.slideMake();
-        slide.slideLeft();
-        slide.slideRight();
+        Slider.prototype.left = "0px";
+        Slider.prototype.ShowNow = 0;
+        Slider.prototype.sliderOffset = [];
+        Slider.prototype.leftbutton = document.querySelector('.leftbutton');
+        Slider.prototype.rightbutton = document.querySelector('.rightbutton');
+        Slider.prototype.imgWidth = function() {
+            // функция для подсчета ширины img в зависимости от количества слайдов
+            for (var i = 0; i < this.slideNumber; i++) {
+                document.querySelector(".slides" + ":nth-child(" + (i + 1) + ")").style.width = 100 / this.slideNumber + "%";
+
+            }
+        };
+        Slider.prototype.sliderWidth = function() {
+            // функция подсчета ширины всего блока с img от количества слайдов
+            document.querySelector('.slider-slides').style.width = this.slideNumber * 100 + "%";
+        };
+        Slider.prototype.slideMake = function() {
+            for (var i = 0; i < this.slideNumber; i++) {
+                this.sliderOffset.push(-i * 100 + '%');
+            }
+            console.log(this.sliderOffset);
+        };
+        Slider.prototype.slideLeft = function() {
+            var that = this;
+            this.leftbutton.onclick = function() {
+                --that.ShowNow;
+
+                if(that.ShowNow < 0) {
+                    that.ShowNow = that.slideNumber - 1;
+                }
+                console.log(that.ShowNow);
+                that.lightBubs(that.ShowNow);
+                document.querySelector(".slider-slides").style.left = that.sliderOffset[that.ShowNow];
+            }
+        };
+        Slider.prototype.slideRight = function() {
+            var that = this;
+            this.rightbutton.onclick = function() {
+                ++that.ShowNow;
+                if(that.ShowNow > that.slideNumber -1) {
+                    that.ShowNow = 0;
+                }
+                console.log(that.ShowNow);
+                that.lightBubs(that.ShowNow);
+
+                document.querySelector(".slider-slides").style.left = that.sliderOffset[that.ShowNow];
+            }
+        };
+        Slider.prototype.firstBub = document.getElementById("slider-controls-btn-1");
+        Slider.prototype.secondBub = document.getElementById("slider-controls-btn-2");
+        Slider.prototype.thirdBub = document.getElementById("slider-controls-btn-3");
+
+        Slider.prototype.clickBubs = function() {
+            var that = this;
+            this.firstBub.onclick = function() {
+                if (that.ShowNow === 0) {
+                    return;
+                } else {
+                that.ShowNow = 0;
+                document.querySelector(".slider-slides").style.left = that.sliderOffset[that.ShowNow];
+                that.lightBubs(that.ShowNow);
+                }
+            };
+            this.secondBub.onclick = function() {
+                if (that.ShowNow === 1) {
+                    return;
+                } else {
+                that.ShowNow = 1;
+                document.querySelector(".slider-slides").style.left = that.sliderOffset[that.ShowNow];
+                that.lightBubs(that.ShowNow);
+                }
+            };
+            this.thirdBub.onclick = function() {
+                if (that.ShowNow === 2) {
+                    return;
+                } else {
+                    that.ShowNow = 2;
+                document.querySelector(".slider-slides").style.left = that.sliderOffset[that.ShowNow];
+                that.lightBubs(that.ShowNow);
+                }
+            };
+        };
+        Slider.prototype.lightBubs = function() {
+            for (var i = 0; i < this.slideNumber; i++) {
+                if (this.ShowNow == 0) {
+                    document.getElementById("slider-controls-btn-1").classList.add("active");
+                    document.getElementById("slider-controls-btn-2").classList.remove("active");
+                    document.getElementById("slider-controls-btn-3").classList.remove("active");
+                } else if (this.ShowNow == 1) {
+                    document.getElementById("slider-controls-btn-1").classList.remove("active");
+                    document.getElementById("slider-controls-btn-2").classList.add("active");
+                    document.getElementById("slider-controls-btn-1").classList.remove("active");
+                } else if (this.ShowNow == 2){
+                    document.getElementById("slider-controls-btn-1").classList.remove("active");
+                    document.getElementById("slider-controls-btn-2").classList.remove("active");
+                    document.getElementById("slider-controls-btn-3").classList.add("active");
+                }
+            }
+        };
+
+
+        var slider1 = new Slider("slider1", 1);
+        slider1.imgWidth();
+        slider1.sliderWidth();
+        slider1.slideMake();
+        slider1.clickBubs();
+        slider1.lightBubs();
+        slider1.slideLeft();
+        slider1.slideRight();
+        slider1.lightBubs();
+
+
+        // var slider2 = new Slider("slider2", 2);
+        // console.log(slider2.name);
+        // slider2.imgWidth();
+        // slider2.sliderWidth();
+        // slider2.slideMake();
+        // slider2.slideLeft();
+        // slider2.slideRight();
+
+
+
+        // var slide = {
+        //
+        //     left: document.querySelector(".slider-slides").style.left,
+        //     slideNumber: document.querySelector(".slider-slides").getElementsByTagName('img').length,
+        //     ShowNow: 0,
+        //     sliderOffset: [],
+        //     leftbutton: document.querySelector('.leftbutton'),
+        //     rightbutton: document.querySelector('.rightbutton'),
+        //     imgWidth: function() {
+        //         // функция для подсчета ширины img в зависимости от количества слайдов
+        //         for (var i = 0; i < this.slideNumber; i++) {
+        //             document.querySelector(".slides" + ":nth-child(" + (i + 1) + ")").style.width = 100 / this.slideNumber + "%";
+        //
+        //         }
+        //     },
+        //     sliderWidth: function() {
+        //         // функция подсчета ширины всего блока с img от количества слайдов
+        //         document.querySelector('.slider-slides').style.width = this.slideNumber * 100 + "%";
+        //     },
+        //     slideMake: function() {
+        //         for (var i = 0; i < this.slideNumber; i++) {
+        //             this.sliderOffset.push(-i * 100 + '%');
+        //         }
+        //         console.log(this.sliderOffset);
+        //     },
+        //     slideLeft: function() {
+                // var shownowL = this.ShowNow;
+                // var slidenumberL = this.slideNumber;
+                // this.leftbutton.onclick = function() {
+                //     --slide.ShowNow;
+                //     console.log(slide.ShowNow);
+                //     if(slide.ShowNow < 0) {
+                //         slide.ShowNow = slide.slideNumber - 1;
+                //     }
+                //     console.log(slide.ShowNow);
+                //     document.querySelector(".slider-slides").style.left = slide.sliderOffset[slide.ShowNow];
+                // }
+        //     },
+        //     slideRight: function() {
+            //     this.rightbutton.onclick = function() {
+            //         ++slide.ShowNow;
+            //         console.log(slide.ShowNow);
+            //         if(slide.ShowNow > slide.slideNumber -1) {
+            //             slide.ShowNow = 0;
+            //         }
+            //         console.log(slide.ShowNow);
+            //         document.querySelector(".slider-slides").style.left = slide.sliderOffset[slide.ShowNow];
+            //     }
+            // },
+        //     lightBubs: function() {
+        //
+        //     }
+        // }
+        //
+        // slide.imgWidth();
+        // slide.sliderWidth();
+        // slide.slideMake();
+        // slide.slideLeft();
+        // slide.slideRight();
 
     </script>
 
