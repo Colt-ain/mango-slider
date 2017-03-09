@@ -1,4 +1,4 @@
-# mango-slider
+# mangoose-slider
 
 What is it. It's my fist hand-made slider on clearly javascript. You can use this in your pages any where and anytime.
 
