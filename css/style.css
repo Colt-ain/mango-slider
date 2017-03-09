@@ -1,12 +1,5 @@
-.slider-container {
-    position: relative;
-    width: 100%;
-}
-
 .slider {
-    position: relative;
     transition: left 0.76s;
-    overflow: hidden;
 }
 .slider-slides img {
     float: left;
@@ -19,10 +12,6 @@
     z-index: 100;
 }
 .slider-controls-left {
-    position: absolute;
-    z-index: 100;
-    top: 0;
-    button: 0;
     width: 15%;
     height: 100%;
     font-size: 30px;
@@ -30,7 +19,6 @@
     text-align: center;
     text-shadow: 0 1px 2px rgba(0,0,0,.6);
     background-color: rgba(0,0,0,0);
-    cursor: pointer;
 }
 .slider-controls-left:hover {
     background-image: linear-gradient(to right,rgba(0,0,0,.5) 0, rgba(0,0,0,.0001) 100%);
@@ -47,11 +35,6 @@
     top: 45%;
 }
 .slider-controls-right {
-    position: absolute;
-    z-index: 100;
-    top: 0;
-    button: 0;
-    left: calc(85%);
     width: 15%;
     height: 100%;
     font-size: 30px;
@@ -59,7 +42,6 @@
     text-align: center;
     text-shadow: 0 1px 2px rgba(0,0,0,.6);
     background-color: rgba(0,0,0,0);
-    cursor: pointer;
 }
 .slider-controls-btn {
     display: inline-block;

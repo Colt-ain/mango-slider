@@ -12,6 +12,27 @@ function Slider(name, number) {
     this.firstBub = document.querySelector(".slider-container-" + this.number).querySelector(".slider-controls").querySelector(".slider-controls-btn-1");
     this.secondBub = document.querySelector(".slider-container-" + this.number).querySelector(".slider-controls").querySelector(".slider-controls-btn-2");
     this.thirdBub = document.querySelector(".slider-container-" + this.number).querySelector(".slider-controls").querySelector(".slider-controls-btn-3");
+    // назначение стилей начало
+    document.querySelector(".slider-container-" + this.number).style.width = "100%";
+    document.querySelector(".slider-container-" + this.number).style.position = "relative";
+    document.querySelector(".slider-container-" + this.number).querySelector(".slider").style.position = "relative";
+
+    document.querySelector(".slider-container-" + this.number + " .slider ").style.overflow = "hidden";
+    // document.querySelector(".slider-container-" + this.number + " .slider  .slider-slides").querySelectorAll(".slides").style.cssFloat = "left";
+
+    this.leftbutton.style.position = "absolute";
+    this.leftbutton.style.zIndex = "100";
+    this.leftbutton.style.top = "0px";
+    this.leftbutton.style.bottom = "0px";
+    this.leftbutton.style.cursor = "pointer";
+    this.rightbutton.style.position = "absolute";
+    this.rightbutton.style.zIndex = "100";
+    this.rightbutton.style.top = "0px";
+    this.rightbutton.style.left = "85%";
+    this.rightbutton.style.width = "15%";
+    this.rightbutton.style.bottom = "0px";
+    this.rightbutton.style.cursor = "pointer";
+    // назначение стилей конец
     this.imgWidth = function() {
         // функция для подсчета ширины img в зависимости от количества слайдов
         var that = this;
