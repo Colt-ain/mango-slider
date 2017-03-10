@@ -18,7 +18,13 @@ function Slider(name, number) {
     document.querySelector(".slider-container-" + this.number).querySelector(".slider").style.position = "relative";
 
     document.querySelector(".slider-container-" + this.number + " .slider ").style.overflow = "hidden";
-    // document.querySelector(".slider-container-" + this.number + " .slider  .slider-slides").querySelectorAll(".slides").style.cssFloat = "left";
+    this.sliderFloat = function() {
+        var img = document.querySelector(".slider-container-" + this.number + " .slider .slider-slides").querySelectorAll(".slides");
+        for (i = 0; i < this.slideNumber; i++) {
+            img[i].style.cssFloat = "left";
+        }
+    }
+    // document.querySelector(".slider-container-" + this.number + " .slider .slider-slides").querySelectorAll(".slides").style
 
     this.leftbutton.style.position = "absolute";
     this.leftbutton.style.zIndex = "100";
@@ -124,6 +130,11 @@ function Slider(name, number) {
             }
         }
     };
+    this.lightDouwn = function() {
+        if (this.ShowNow == 0) {
+            document.querySelector()
+        }
+    }
 }
 
 
@@ -141,6 +152,7 @@ slider1.lightBubs();
 slider1.slideLeft();
 slider1.slideRight();
 slider1.lightBubs();
+slider1.sliderFloat();
 
 var slider2 = new Slider("slider2", 2);
 slider2.imgWidth();
@@ -151,6 +163,7 @@ slider2.lightBubs();
 slider2.slideLeft();
 slider2.slideRight();
 slider2.lightBubs();
+slider2.sliderFloat();
 
 var slider3 = new Slider("slider3", 3);
 slider3.imgWidth();
@@ -161,3 +174,4 @@ slider3.lightBubs();
 slider3.slideLeft();
 slider3.slideRight();
 slider3.lightBubs();
+slider3.sliderFloat();
